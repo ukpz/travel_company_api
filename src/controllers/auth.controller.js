@@ -23,13 +23,12 @@ exports.login = async(req, res) => {
         const user = await User.findOne({ email });
 
         if (!user || !await user.isValidPassword(password))
-            return res.status(200).json({ success: false, message: 'Invalid email or password!' });
+            return res.status(200).json({message: 'Invalid email or password!' });
 
-        if (!user.status) return res.status(200).json({ success: false, message: 'Your account is not active!' })
+        if (!user.status) return res.status(200).json({message: 'Your account is not active!' })
 
         const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' })
         res.status(200).json({
-            success: true,
             message: 'Login successful',
             data: {
                 name: user.name,
