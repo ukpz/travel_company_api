@@ -3,9 +3,15 @@ const jwt = require("jsonwebtoken")
 
 exports.signup = async(req, res) => {
     try {
+        const [emilExist, phoneExist]=await Promise.all([
+            await User.findOne({email:req.body.email}),
+            await User.findOne({phone:req.body.phone})
+        ]);
         
+        if (emilExist) return res.status(400).json({message: 'Email already exists!' });
+        if (phoneExist) return res.status(400).json({ message: 'Phone number already exists!' });
         const user =await User.create(req.body)
-        if (user) res.status(200).json("success")
+        if (user) res.status(200).json({message: 'signup successful'})
     } catch (error) {
         res.status(500).json(error.message)
     }
