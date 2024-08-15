@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken")
 
 exports.signup = async(req, res) => {
     try {
+        
         const user =await User.create(req.body)
         if (user) res.status(200).json("success")
     } catch (error) {
