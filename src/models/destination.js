@@ -5,6 +5,7 @@ const schema = mongoose.Schema({
     slug: { type: String, required: true },
     thumbnail_image: { type: String },
     hasChildren: { type: Boolean, default: false },
+    tourCount:{type: Number},
     type: { type: String },
     parent: { type: mongoose.Schema.Types.ObjectId, default: null },
     active: { type: Boolean, default: true }
