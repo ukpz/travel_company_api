@@ -9,6 +9,8 @@ const userSchema = mongoose.Schema({
     role: { type: String, enum: ["customer", "admin", "operator"], default: "customer" },
     status: { type: Boolean, default: true },
     avatar: { type: String },
+    resetToken:{type:String},
+    authSource: { type: String, enum: ["self", "google"], default: "self" },
     details: {
         age: { type: Number },
         gender: { type: String, enum: ['male', 'female', 'other'] }

@@ -1,5 +1,16 @@
-const app = require("./app")
+const express=require("express");
+const cors=require("cors");
+const app=express();
+
 require("dotenv").config();
+require("./config/dbConnection")()
+
+app.use(express.json());
+app.use(cors())
+app.use('/api',require("./routes"))
+
+// base url
+app.get("/",(_,res)=>res.json("travel api running..."))
 
 //start server
 app.listen(process.env.PORT, () => {

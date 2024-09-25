@@ -1,8 +1,9 @@
 const Destination = require("../models/destination")
 
-exports.index = async(req, res) => {
+exports.index = async (req, res) => {
     try {
-        const destinations=await Destination.find();
+        const {search, limit, offset, sortAsc, sortDsc } = req.query
+        const destinations = await Destination.find({ "name": { $regex: new RegExp(search, 'i') } }).limit(limit ?? 6);
         res.status(200).json(destinations);
     } catch (error) {
         res.status(500).json(error.message);
