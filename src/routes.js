@@ -24,8 +24,8 @@ const bookingController = require("./controllers/booking.controller");
 router.route('/bookings').post(auth(), bookingController.create)
 
 const wishListController = require("./controllers/wishlist.controller");
-router.route('/wishlist').get(auth(), wishListController.getItems)
-    .post(auth(), wishListController.addItem).delete(auth(), wishListController.removeItem)
+router.route('/wishlist').get(auth(), wishListController.getItems).post(auth(), wishListController.addItem)
+router.post('/wishlist/remove',auth(), wishListController.removeItem)
 
 
 // CUSTOMER ROUTES
